@@ -24,9 +24,25 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
+const { Server } = require("socket.io");
+const io = new Server(server);
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
+
+io.on('connection', (socket) => {
+  socket.on('test', (msg) => {
+	  console.log(msg[0]);
+	io.emit('test', msg)
+  });
+});
+
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+
 
 /**
  * Normalize a port into a number, string, or false.
