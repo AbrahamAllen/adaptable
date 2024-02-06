@@ -7,8 +7,7 @@ require('dotenv').config();
 const app = require('./app');
 const http = require('http');
 
-const { Server } = require("socket.io");
-const io = new Server(server);
+
 
 /**
  * Get port from environment and store in Express.
